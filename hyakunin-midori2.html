@@ -686,7 +686,8 @@ function renderQuestion(){
 
       if(!isCorrect && speechAvailable()){
         setTimeout(async () => {
-          await speakAsync(q.shimo); // 正しい下の句
+          await speakAsync(q.shimoRead || q.shimo); // ★読み上げ用を優先
+
           goNext();
         }, 200);
       } else {
@@ -756,7 +757,8 @@ btnReview.addEventListener("click", ()=>{
 btnSpeak.addEventListener("click", ()=>{
   if(qIndex < currentSet.length){
     // 上の句読み上げ（待たなくてOKだが、重なり防止でasync版）
-    speakAsync(currentSet[qIndex].kami);
+    speakAsync(currentSet[qIndex].kamiRead || currentSet[qIndex].kami); // ★読み上げ用を優先
+
   }
 });
 </script>
